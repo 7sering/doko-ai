@@ -7,6 +7,7 @@ export default function Home() {
         Hello Doko AI - SAAS
       </h1>
       <Button variant="danger" size="lg">Learn More</Button>
+      <Button variant="danger" size="lg">Learn More</Button>
     </>
   );
 }

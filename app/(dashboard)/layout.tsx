@@ -1,25 +1,22 @@
-import Navbar from '@/components/navbar'
-import React from 'react'
+import Navbar from "@/components/navbar";
+import Sidebar from "@/components/sidebar";
+import React from "react";
 
-const DashboardLayouts = ({children}:{
-    children: React.ReactNode
-}) => {
+const DashboardLayouts = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-    <div className='h-full relative'>
+      <div className="h-full relative">
         <div className="hidden h-full text-white md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 z-[80] bg-gray-900">
-            <div>
-                Sidebar
-            </div>
+          <Sidebar />
         </div>
 
-        <main className='md:pl-72'>
-            <Navbar/>
-               {children}
+        <main className="md:pl-72">
+          <Navbar />
+          {children}
         </main>
-    </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default DashboardLayouts
+export default DashboardLayouts;

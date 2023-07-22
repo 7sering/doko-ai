@@ -1,21 +1,19 @@
-import React from 'react'
-import { Button } from '@/components/ui/button'
-import { Menu } from 'lucide-react'
-import { UserButton } from '@clerk/nextjs'
+import React from "react";
+
+import { UserButton } from "@clerk/nextjs";
+import MobileSidebar from "@/components/mobile-sidebar";
 
 const Navbar = () => {
   return (
-<>
-    <div className="navbar item-center p-4">
-        <Button variant="ghost" size="icon" className='md:hidden'>
-            <Menu/>
-        </Button>
-        <div className='flex w-full justify-end'>
-            <UserButton afterSignOutUrl="/"/>
+    <>
+      <div className="navbar item-center p-4">
+        <MobileSidebar />
+        <div className="flex w-full justify-end">
+          <UserButton afterSignOutUrl="/" />
         </div>
-    </div>
-</>
-  )
-}
+      </div>
+    </>
+  );
+};
 
-export default Navbar
+export default Navbar;

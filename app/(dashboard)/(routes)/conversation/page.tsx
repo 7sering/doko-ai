@@ -1,8 +1,8 @@
 "use client";
+import * as z from "zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-import * as z from "zod";
 import Heading from "@/components/heading";
 import { MessageSquare } from "lucide-react";
 import React, { useState } from "react";
@@ -16,6 +16,8 @@ import { Form, FormField, FormControl, FormItem } from "@/components/ui/form";
 import { formSchema } from "./constants";
 import { useRouter } from "next/navigation";
 import { ChatCompletionRequestMessage } from "openai";
+import { Empty } from "@/components/empty";
+import { Loader } from "@/components/loader";
 
 const Conversation = () => {
   const router = useRouter();
@@ -108,9 +110,15 @@ const Conversation = () => {
 
           {/* message section */}
           <div className="space-y-4 mt-4">
-              {messages.length === 0 && !isLoading && (
-                <p>Empty</p>
-              )}
+            {isLoading && (
+              <div className="p-8 rounded-lg w-full flex item-center justify-center bg-muted">
+               <Loader/>
+              </div>
+            )}
+
+            {messages.length === 0 && !isLoading && (
+              <Empty label="No Conversation stared." />
+            )}
             <div className="flex flex-col-reverse gap-y-4">
               {messages.map((message) => (
                 <div key={message.name}>{message.content}</div>

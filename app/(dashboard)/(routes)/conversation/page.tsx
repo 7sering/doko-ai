@@ -81,14 +81,10 @@ const Conversation = () => {
             </form>
           </Form>
 
-          <div className="space-y-4 mt-4">
-                  messages content
-                </div>
+
+          {/* message section */}
+          <div className="space-y-4 mt-4">messages content</div>
         </div>
-
-
-               
-
       </div>
     </>
   );

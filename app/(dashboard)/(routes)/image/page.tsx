@@ -2,9 +2,9 @@
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import Image from "next/image";
 
 import Heading from "@/components/heading";
-import { Image } from "lucide-react";
 import React, { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 
 import { Form, FormField, FormControl, FormItem } from "@/components/ui/form";
 
-import { amountOptions,resolutionOptions, formSchema } from "./constants";
+import { amountOptions, resolutionOptions, formSchema } from "./constants";
 import { useRouter } from "next/navigation";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
@@ -25,6 +25,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Card, CardFooter } from "@/components/ui/card";
+import { ImageIcon, Download } from "lucide-react";
 
 const ImagePage = () => {
   const router = useRouter();
@@ -60,7 +62,7 @@ const ImagePage = () => {
         <Heading
           title="Image Generation"
           description="Turn your prompt into image"
-          icon={Image}
+          icon={ImageIcon}
           iconColor="text-pink-700"
           bgCOlor="bg-pink-700/10"
         />
@@ -125,7 +127,7 @@ const ImagePage = () => {
                   </FormItem>
                 )}
               />
-                  <FormField
+              <FormField
                 control={form.control}
                 name="resolution"
                 render={({ field }) => (
@@ -175,7 +177,25 @@ const ImagePage = () => {
             {images.length === 0 && !isLoading && (
               <Empty label="No Images Generated Yet" />
             )}
-            <div>image will render here soon....</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 mt-8">
+              {images.map((src) => (
+                <Card key={src} className="rounded-lg overflow-hidden">
+                  <div className="relative aspect-square">
+                    <Image alt="Image" fill src={src} />
+                  </div>
+                  <CardFooter>
+                    <Button
+                      onClick={() => window.open(src, "_blank")}
+                      variant={"secondary"}
+                      className="w-full"
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      Download
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 import Heading from "@/components/heading";
-import { Music } from "lucide-react";
+import { VideoIcon } from "lucide-react";
 import React, { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,9 +18,9 @@ import { useRouter } from "next/navigation";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 
-const MusicPage = () => {
+const VideoPage = () => {
   const router = useRouter();
-  const [music, setMusic] = useState<string>();
+  const [video, setVideo] = useState<string>();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -32,9 +32,9 @@ const MusicPage = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setMusic(undefined);
-      const response = await axios.post("/api/music", values);
-      setMusic(response.data.audio);
+      setVideo(undefined);
+      const response = await axios.post("/api/video", values);
+      setVideo(response.data[0]);
       form.reset();
     } catch (error: any) {
       //open pro modal
@@ -47,11 +47,11 @@ const MusicPage = () => {
     <>
       <div>
         <Heading
-          title="Music Generation"
-          description="Generate Your Custom Music"
-          icon={Music}
-          iconColor="text-emerald-500"
-          bgCOlor="bg-emerald-500/10"
+          title="Video Generation"
+          description="Generate Your Custom Video"
+          icon={VideoIcon}
+          iconColor="text-orange-700"
+          bgCOlor="bg-orange-700/10"
         />
 
         <div className="px-4 lg:px-8">
@@ -79,7 +79,7 @@ const MusicPage = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="Violin Music"
+                        placeholder="Horse grassing in green field"
                         {...field}
                       />
                     </FormControl>
@@ -106,11 +106,11 @@ const MusicPage = () => {
               </div>
             )}
 
-            {!music && !isLoading && <Empty label="No Music Generated." />}
-            {music && (
-              <audio controls className="w-full mt-8">
-                <source src={music} type="audio/mpeg" />
-              </audio>
+            {!video && !isLoading && <Empty label="No Video Generated." />}
+            {video && (
+            <video className="w-full aspect-video mt-8 rounded-lg border bg-black">
+                <source src={video} type="video/mp4" />
+            </video>
             )}
           </div>
         </div>
@@ -119,4 +119,4 @@ const MusicPage = () => {
   );
 };
 
-export default MusicPage;
+export default VideoPage;

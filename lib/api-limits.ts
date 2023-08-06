@@ -6,7 +6,7 @@ export const increaseApiLimit = async () => {
   const { userId } = auth();
   //if user is not available break code or return
   if (!userId) {
-    return false;
+    return;
   }
 
   // Find user if its all ready exist in modal
@@ -49,4 +49,27 @@ export const checkApiLimit = async () => {
   } else {
     return false;
   }
+};
+
+// Get API Limit Count
+
+export const getApiLimitCount = async () => {
+  const { userId } = auth();
+
+  //if user is not available break return 0
+  if (!userId) {
+    return 0;
+  }
+
+  // Else Fetch user api limits
+  const userApiLimit = await prismadb.userApiLimit.findUnique({
+    where: {
+      userId: userId,
+    },
+  });
+
+  if (!userApiLimit) {
+    return 0;
+  }
+  return userApiLimit.count;
 };

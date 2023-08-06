@@ -29,7 +29,7 @@ export const increaseApiLimit = async () => {
   }
 };
 // Check Whether current user reached the api limit or not
-export const isApiLimitReached = async () => {
+export const checkApiLimit = async () => {
   const { userId } = auth();
 
   //if user is not available break code or return

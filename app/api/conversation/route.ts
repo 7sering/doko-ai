@@ -32,10 +32,11 @@ export async function POST(req: Request) {
     }
 
     //check free Api Limit is over or not
-    const freeApiLimit = await checkApiLimit();
-    if (!freeApiLimit) {
-      return new NextResponse("Free Trail Is Expired", { status: 403 });
+    const freeTrial = await checkApiLimit();
+    if (!freeTrial ) {
+      return new NextResponse("Free trial has expired. Please upgrade to pro.", { status: 403 });
     }
+
 
     //Response from OPEN AI
     const response = await openai.createChatCompletion({

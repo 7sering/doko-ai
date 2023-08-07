@@ -88,13 +88,9 @@ export const ProModal = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button
-          size={"lg"}
-          className="w-full"
-          variant={"premium"}
-          >
+          <Button size={"lg"} className="w-full" variant={"premium"}>
             Upgrade
-            <Zap className="w-4 h-4 ml-2 fill-white"/>
+            <Zap className="w-4 h-4 ml-2 fill-white" />
           </Button>
         </DialogFooter>
       </DialogContent>

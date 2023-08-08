@@ -12,7 +12,7 @@ export async function GET() {
     const { userId } = auth();
     const user = await currentUser();
 
-    //if there is no userId or no user
+    //if there is no userId or no user at least one condition should match
     if (!userId || !user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
@@ -32,6 +32,7 @@ export async function GET() {
       return new NextResponse(JSON.stringify({ url: stripeSession.url }));
     }
 
+    //Create a new subscription
     const stripeSession = await stripe.checkout.sessions.create({
       success_url: settingUrl,
       cancel_url: settingUrl,

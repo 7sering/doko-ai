@@ -9,8 +9,12 @@ import { useProModal } from "@/hooks/use-pro-modal";
 
 interface FreeCounterProps {
   apiLimitCount: number;
+  isPro: boolean;
 }
-const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
+const FreeCounter = ({
+  apiLimitCount = 0,
+  isPro = false,
+}: FreeCounterProps) => {
   const proModal = useProModal();
   const [mounted, setMounted] = useState(false); //for preventing hydration error
 
@@ -20,6 +24,9 @@ const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
 
   //if not mounted return null
   if (!mounted) {
+    return null;
+  }
+  if (isPro) {
     return null;
   }
 
@@ -38,7 +45,6 @@ const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
           </div>
           <Button
             onClick={proModal.onOpen}
-            
             className="w-full"
             variant="premium"
           >

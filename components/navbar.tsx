@@ -3,13 +3,15 @@ import React from "react";
 import { UserButton } from "@clerk/nextjs";
 import MobileSidebar from "@/components/mobile-sidebar";
 import { getApiLimitCount } from "@/lib/api-limits";
+import { checkSubscription } from "@/lib/subscription";
 
 const Navbar = async() => {
   const apiLimitCount = await getApiLimitCount()
+  const isPro = await checkSubscription()
   return (
     <>
       <div className="navbar item-center p-4">
-        <MobileSidebar apiLimitCount={apiLimitCount} />
+        <MobileSidebar isPro={isPro} apiLimitCount={apiLimitCount} />
         <div className="flex w-full justify-end">
           <UserButton afterSignOutUrl="/" />
         </div>

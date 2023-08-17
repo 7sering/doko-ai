@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import Replicate from "replicate";
 
 import { increaseApiLimit, checkApiLimit } from "@/lib/api-limits";
+import { checkSubscription } from "@/lib/subscription";
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN!,
@@ -26,9 +27,13 @@ export async function POST(req: Request) {
     }
 
     //check free Api Limit is over or not
-    const freeApiLimit = await checkApiLimit();
-    if (!freeApiLimit) {
-      return new NextResponse("Free Trail Is Expired", { status: 403 });
+    const freeTrial = await checkApiLimit();
+    const isPro = await checkSubscription();
+    if (!freeTrial && !isPro) {
+      return new NextResponse(
+        "Free trial has expired. Please upgrade to pro.",
+        { status: 403 }
+      );
     }
 
     //Response from REPLICATE AI
@@ -41,7 +46,9 @@ export async function POST(req: Request) {
       }
     );
 
-    await increaseApiLimit();
+    if(!isPro){
+      await increaseApiLimit();
+    }
 
     return NextResponse.json(response);
   } catch (error) {

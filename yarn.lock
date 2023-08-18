@@ -1479,10 +1479,10 @@ cookie@0.5.0:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.5.0.tgz#d1f5d71adec6558c58f389987c366aa47e994f8b"
   integrity sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==
 
-crisp-sdk-web@^1.0.19:
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/crisp-sdk-web/-/crisp-sdk-web-1.0.19.tgz#83213f18d4fbd1eb185eb3fbaffb948b7fdd99d5"
-  integrity sha512-kV/MyXVnQrVUwO9Stb7bUYr34BnslVhb5UZTUAa/qz1LvTrKtCBu5SYHyIYDiC29CHKrVXPenVyerpH/ZvuF/g==
+crisp-sdk-web@^1.0.21:
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/crisp-sdk-web/-/crisp-sdk-web-1.0.21.tgz#94dc22d8a609ab1645a0f0438833a2cdf7325d2e"
+  integrity sha512-jNF/zSSA0lsAWT3q4JLG6YxtMRvgai++PwesxEL2Zm6utZaN+AoWPAH01QTfjJC/c++nFT7YM56ucdi+Y5yP4A==
 
 cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"

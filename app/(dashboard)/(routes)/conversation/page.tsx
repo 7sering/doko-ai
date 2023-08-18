@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 import { useProModal } from "@/hooks/use-pro-modal";
+import { toast } from "react-hot-toast";
 
 const Conversation = () => {
   const router = useRouter();
@@ -40,6 +41,7 @@ const Conversation = () => {
     // console.log(values);
 
     try {
+      // throw new Error("test error");
       const userMessage: ChatCompletionRequestMessage = {
         role: "user",
         content: values.prompt,
@@ -55,7 +57,10 @@ const Conversation = () => {
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.onOpen();
+      }else{
+        toast.error("something went wrong")
       }
+      
     } finally {
       router.refresh();
     }

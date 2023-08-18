@@ -28,6 +28,7 @@ import {
 import { Card, CardFooter } from "@/components/ui/card";
 import { ImageIcon, Download } from "lucide-react";
 import { useProModal } from "@/hooks/use-pro-modal";
+import { toast } from "react-hot-toast";
 
 const ImagePage = () => {
   const router = useRouter();
@@ -55,6 +56,8 @@ const ImagePage = () => {
       //open pro modal
       if (error?.response?.status === 403) {
         proModal.onOpen();
+      } else{
+        toast.error("something went wrong during image generation")
       }
     } finally {
       router.refresh();

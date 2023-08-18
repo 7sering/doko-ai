@@ -24,6 +24,7 @@ import { cn } from "@/lib/utils";
 
 import ReactMarkdown from "react-markdown";
 import { useProModal } from "@/hooks/use-pro-modal";
+import { toast } from "react-hot-toast";
 
 const CodePage = () => {
   const router = useRouter();
@@ -58,6 +59,8 @@ const CodePage = () => {
       //open pro modal
       if (error?.response?.status === 403) {
         proModal.onOpen();
+      } else{
+        toast.error("something went wrong")
       }
     } finally {
       router.refresh();
